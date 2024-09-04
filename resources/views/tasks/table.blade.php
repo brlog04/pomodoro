@@ -4,7 +4,7 @@
         <th>Description</th>
         <th>Note</th>
         <th>Status Id</th>
-        <th>User Id</th>
+        <th>User</th>
         <th>Project Id</th>
         <th>Start Date</th>
         <th>End Date</th>
@@ -18,9 +18,9 @@
                 <td>{{ $task->name }}</td>
                 <td>{{ $task->description }}</td>
                 <td>{{ $task->note }}</td>
-                <td>{{ $task->status_id }}</td>
-                <td>{{ $task->user_id }}</td>
-                <td>{{ $task->project_id }}</td>
+                <td>{{ $task->status->name }}</td>
+                <td>{{ $task->user->name }}</td>
+                <td>{{ $task->project->name }}</td>
                 <td>{{ $task->start_date }}</td>
                 <td>{{ $task->end_date }}</td>
                 <td>{{ $task->completed_on }}</td>

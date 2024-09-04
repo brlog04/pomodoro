@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Projects;
+use App\Models\Status;
 use App\Models\Tasks;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -12,7 +16,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Tasks::all();
+        $tasks = Tasks::with('project','status','user')->get();
+        //dd($tasks);
         return view('tasks.index', ['tasks' => $tasks]);
     }
 
@@ -21,7 +26,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('tasks.create');
+        $projects = Projects::all();
+        $statuses = Status::all();
+        $users = User::all();
+        return view('tasks.create',['projects'=>$projects,'statuses'=>$statuses,'users'=>$users]);
     }
 
     /**
@@ -44,11 +52,11 @@ class TaskController extends Controller
             'description' => $description,
             'note' => $note,
             'project_id' => $project_id,
-            'user_id' => $user_id,
+            'user_id' => Auth::user()->id,
             'status_id' => $status_id,
             'start_date' => $start_date,
             'end_date' => $end_date,
-            'created_by' => 1
+            'created_by' => Auth::user()->id
         ]);
         return redirect(route('tasks.index'));
     }
