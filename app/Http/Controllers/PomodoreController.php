@@ -21,7 +21,8 @@ class PomodoreController extends Controller
     }
 
     public function index(){
-        $pomodoros = Pomodoros::all();
+        $pomodoros = Pomodoros::with('user', 'project', 'status', 'tasks')->get(); //'status', , 'task'
+        //dd($pomodoros);
         return view ('pomodoros.index',['pomodoros'=>$pomodoros]);
     }
 

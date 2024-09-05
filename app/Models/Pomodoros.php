@@ -30,11 +30,11 @@ class Pomodoros extends Model
     }
 
     public function status(){
-        return $this->hasOne(Status::class);
+        return $this->hasOne(Status::class,'id');
     }
 
-    public function task(){
-        return $this->hasOne(Tasks::class);
+    public function tasks(){
+        return $this->hasMany(Tasks::class, 'id');
     }
 }
 
