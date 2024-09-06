@@ -10,9 +10,9 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {       
+    {
         Schema::table('pomodoros', function(Blueprint $table){
-            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('task_id')->change();
         });
     }
 
@@ -21,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pomodoros', function (Blueprint $table){
-            $table->dropForeign(['task_id']);
+        Schema::table('pomodoros', function(Blueprint $table){
+            $table->integer('task_id')->change();
         });
-        
     }
 };
