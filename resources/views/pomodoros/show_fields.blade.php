@@ -14,11 +14,6 @@
 </div>
 
 <div class="form-group">
-    <label for="project_id">Project id:</label>
-    <p>{{$pomodoro->project_id}}</p>
-</div>
-
-<div class="form-group">
     <label for="start">Start:</label>
     <p>{{$pomodoro->start}}</p>
 </div>

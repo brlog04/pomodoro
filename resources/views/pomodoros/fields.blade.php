@@ -21,13 +21,6 @@
 </div>
 
 <div class="form-group col-sm-6">
-    <label for="project_id">Project id:</label>
-    <input type="text" id="project_id" name="project_id"
-        @if (isset($pomodoro->project_id)) value="{{ old('project_id', $pomodoro->project_id) }}" @endif class="form-control"
-        required><br>
-</div>
-
-<div class="form-group col-sm-6">
     <label for="start">Start:</label>
     <input type="text" id="start" name="start"
         @if (isset($pomodoro->start)) value="{{ old('start', $pomodoro->start) }}" @endif class="form-control"

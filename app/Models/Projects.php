@@ -27,10 +27,6 @@ class Projects extends Model
         return $this->belongsTo(Status::class, 'status_id');
     }
 
-    public function pomodoros(){
-        return $this->hasMany(Pomodoros::class);
-    }
-
     public function tasks(){
         return $this->hasMany(Tasks::class);
     }

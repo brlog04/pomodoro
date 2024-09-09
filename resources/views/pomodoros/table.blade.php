@@ -3,7 +3,6 @@
         <th>Status Id</th>
         <th>Task Id</th>
         <th>User Id</th>
-        <th>Project Id</th>
         <th>Start</th>
         <th>End</th>
         <th>Deleted By</th>
@@ -15,7 +14,6 @@
                 <td>{{ $pomodoro->status_id }}</td>
                 <td>{{ $pomodoro->task_id }}</td>
                 <td>{{ $pomodoro->user_id }}</td>
-                <td>{{ $pomodoro->project_id }}</td>
                 <td>{{ $pomodoro->start }}</td>
                 <td>{{ $pomodoro->end }}</td>
                 <td>{{ $pomodoro->deleted_by }}</td>

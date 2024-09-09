@@ -15,7 +15,6 @@ class Pomodoros extends Model
         'status_id',
         'task_id',
         'user_id',
-        'project_id',
         'start',
         'end',
         'deleted_by'
@@ -23,10 +22,6 @@ class Pomodoros extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
-    }
-
-    public function project(){
-        return $this->belongsTo(Projects::class);
     }
 
     public function status(){

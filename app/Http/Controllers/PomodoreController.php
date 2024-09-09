@@ -21,7 +21,7 @@ class PomodoreController extends Controller
     }
 
     public function index(){
-        $pomodoros = Pomodoros::with('user', 'project', 'status', 'tasks')->get(); //'status', , 'task'
+        $pomodoros = Pomodoros::with('user', 'status', 'tasks')->get(); //'status', , 'task'
         //dd($pomodoros);
         return view ('pomodoros.index',['pomodoros'=>$pomodoros]);
     }
@@ -43,7 +43,6 @@ class PomodoreController extends Controller
             'status_id'=>$request->input('status_id'),
             'task_id'=>$request->input('task_id'),
             'user_id'=>$request->input('user_id'),
-            'project_id'=>$request->input('project_id'),
             'start'=>$request->input('start'),
             'end'=>$request->input('end'),
             'deleted_by'=>$request->input('deleted_by')]
@@ -84,7 +83,6 @@ class PomodoreController extends Controller
         $pomodoros->status_id = $request->input('status_id');
         $pomodoros->task_id = $request->input('task_id');
         $pomodoros->user_id = $request->input('user_id');
-        $pomodoros->project_id = $request->input('project_id');
         $pomodoros->start = $request->input('start');
         $pomodoros->end = $request->input('end');
         $pomodoros->deleted_by = $request->input('deleted_by');
