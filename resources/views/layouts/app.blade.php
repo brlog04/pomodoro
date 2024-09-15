@@ -16,9 +16,11 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/_all.css">
     @yield('css')
+    @vite('resources/js/timer.js')
 </head>
 
 <body class="skin-blue sidebar-mini">
+
     <div class="wrapper">
         <!-- Main Header -->
         <header class="main-header">
@@ -42,7 +44,7 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="http://infyom.com/images/logo/blue_logo_150x150.jpg"
+                                <img src="favicon.ico"
                                     class="user-image" alt="User Image" />
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs">{!! Auth::user()->name !!}</span>
@@ -50,7 +52,7 @@
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="http://infyom.com/images/logo/blue_logo_150x150.jpg"
+                                    <img src="favicon.ico"
                                         class="img-circle" alt="User Image" />
                                     <p>
                                         {!! Auth::user()->name !!}
@@ -87,6 +89,18 @@
             @if (isset($poruka))
             <section style="color: red;">
                 <p>{{ $poruka }}</p>
+                @if($data->isNotEmpty())
+                    @foreach ($data as $pomodoro)
+                        <p id="timer{{$pomodoro->id}}"></p>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                startCountdown("2024-06-01 14:00:00", "{{$pomodoro->end}}", 'timer{{$pomodoro->id}}');
+                            });
+                        </script>                                        
+                    @endforeach
+                @else
+                    <p>Nema podataka u kolekciji.</p>
+                @endif
             </section>
             @endif
             @yield('content')

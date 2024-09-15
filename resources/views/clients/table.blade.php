@@ -20,8 +20,8 @@
                     @csrf
                     @method('DELETE')
                     <div class='btn-group'>
-                        <a href="{{route('clients.show', [$client->id])}}" class='btn btn-default btn-xs'>show</a>
-                        <a href="{{route('clients.edit', [$client->id])}}" class='btn btn-default btn-xs'>edit</a>
+                        <a href="{{route('clients.show', [$client->id])}}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="{{route('clients.edit', [$client->id])}}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                         <a href="#" onclick="document.getElementById('deleteForm').submit(); return false;" class="btn btn-danger btn-xs">delete</a>
                     </div>
                 </form>

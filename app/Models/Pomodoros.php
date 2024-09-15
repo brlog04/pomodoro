@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,12 +25,16 @@ class Pomodoros extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function deletedBy(){
+        return $this->belongsTo(User::class,'deleted_by');
+    }
+
     public function status(){
-        return $this->hasOne(Status::class,'id');
+        return $this->belongsTo(Status::class,'status_id');
     }
 
     public function tasks(){
-        return $this->hasMany(Tasks::class, 'id');
+        return $this->belongsTo(Tasks::class, 'task_id');
     }
 }
 

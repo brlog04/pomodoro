@@ -79,7 +79,10 @@ class TaskController extends Controller
     public function edit(string $id)
     {
         $tasks = Tasks::find($id);
-        return view('tasks.edit',['tasks'=>$tasks]);
+        $statusesEdit = Status::all();
+        $usersEdit = User::all();     
+        $projectsEdit = Projects::all();   
+        return view('tasks.edit',['tasks'=>$tasks,'statusesEdit'=>$statusesEdit,'usersEdit'=>$usersEdit,'projectsEdit'=>$projectsEdit]);
     }
 
     /**

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pomodoros;
+use App\Models\Status;
+use App\Models\Tasks;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PomodoreController extends Controller
@@ -21,7 +25,7 @@ class PomodoreController extends Controller
     }
 
     public function index(){
-        $pomodoros = Pomodoros::with('user', 'status', 'tasks')->get(); //'status', , 'task'
+        $pomodoros = Pomodoros::with('user', 'status', 'tasks','deletedBy')->get(); //'status', , 'task'
         //dd($pomodoros);
         return view ('pomodoros.index',['pomodoros'=>$pomodoros]);
     }
@@ -31,7 +35,10 @@ class PomodoreController extends Controller
      */
     public function create()
     {
-        return view('pomodoros.create');
+        $statuses = Status::all();
+        $users = User::all();
+        $tasks = Tasks::all();
+        return view('pomodoros.create',['statuses'=>$statuses,'users'=>$users,'tasks'=>$tasks]);
     }
 
     /**
@@ -68,10 +75,14 @@ class PomodoreController extends Controller
     public function edit(string $id)
     {
         $pomodoro = Pomodoros::find($id);
+        $tasksToSelect = Tasks::all();
+        $statuses = Status::all();
+        $users = User::all();
+        //dd($pomodoro);
         if (empty($pomodoro)){
             return redirect(route('pomodoros.index'));
         }
-        return view('pomodoros.edit',['pomodoro'=>$pomodoro]);
+        return view('pomodoros.edit',['pomodoro'=>$pomodoro,'tasksToSelect'=>$tasksToSelect,'statuses'=>$statuses,'users'=>$users]);
     }
 
     /**
@@ -95,6 +106,25 @@ class PomodoreController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pomodoro = Pomodoros::find($id);
+        if(empty($pomodoro)){
+            return redirect(route('pomodoros.index'));
+        }
+        $pomodoro->delete();
+        return redirect(route('pomodoros.index'));
     }
+    public static function closeFinishedPomodoros(){
+        $now = Carbon::now();
+        $brojPomodoraZaIzmenu = Pomodoros::where('end','<',$now)->where('status_id','=',value: '1')->count();
+        $finishedPomodoros = Pomodoros::where('end','<',$now)->where('status_id','=','1')->update(['status_id'=>2]);
+        $brojPomodoraZaIzmenuPosleIzmene = Pomodoros::where('end','<',$now)->where('status_id','=',value: '1')->count();
+
+        return response()->json([
+            'message' => 'Podaci uspešno primljeni!',
+            'brojzaizmenu' => $brojPomodoraZaIzmenu,
+            'brojizmenjenih' => $brojPomodoraZaIzmenuPosleIzmene
+        ]);
+    }
+
 }
+

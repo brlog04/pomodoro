@@ -15,7 +15,7 @@
                         @csrf
 
                         <div class="form-group">
-                            @include('pomodoros.fields')
+                            @include('pomodoros.fieldscreate')
                         </div>
                     </form>
                 </div>

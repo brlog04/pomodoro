@@ -27,8 +27,8 @@
 <div class="form-group col-sm-6">
     <label for="status_id">Status:</label>
     <select id="status_id" name="status_id" class="form-control" required>
-        <option value="{{ old('status_id', $tasks->status_id) }}"> {{$tasks->status->name}}</option>
-        @foreach ($statusesEdit as $status)
+        <option value="">Select a status</option> <!-- Opcionalno, za placeholder -->
+        @foreach ($statuses as $status)
         <option value="{{ $status->id }}">{{ $status->name }}</option>
         @endforeach
     </select><br>
@@ -38,8 +38,8 @@
 <div class="form-group col-sm-6">
     <label for="user_id">User:</label>
     <select id="user_id" name="user_id" class="form-control" required>
-        <option value="{{ old('user_id', $tasks->user_id) }}"> {{$tasks->user->name}}</option>
-        @foreach ($usersEdit as $user)
+        <option value="">Select a user</option> <!-- Opcionalno, za placeholder -->
+        @foreach ($users as $user)
         <option value="{{ $user->id }}">{{ $user->name }}</option>
         @endforeach
     </select><br>
@@ -50,8 +50,8 @@
 <div class="form-group col-sm-6">
     <label for="project_id">Project:</label>
     <select id="project_id" name="project_id" class="form-control" required>
-        <option value="{{ old('projec_id', $tasks->project_id) }}"> {{$tasks->project->name}}</option>
-        @foreach ($projectsEdit as $project)
+        <option value="">Select a project</option> <!-- Opcionalno, za placeholder -->
+        @foreach ($projects as $project)
         <option value="{{ $project->id }}">{{ $project->name }}</option>
         @endforeach
     </select><br>

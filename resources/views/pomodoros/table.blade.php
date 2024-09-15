@@ -1,8 +1,8 @@
 <table class="table table-responsive" id="pomodoros-table">
     <thead>
-        <th>Status Id</th>
-        <th>Task Id</th>
-        <th>User Id</th>
+        <th>Status</th>
+        <th>Task</th>
+        <th>User</th>
         <th>Start</th>
         <th>End</th>
         <th>Deleted By</th>
@@ -11,12 +11,12 @@
     <tbody>
         @foreach ($pomodoros as $pomodoro)
             <tr>
-                <td>{{ $pomodoro->status_id }}</td>
-                <td>{{ $pomodoro->task_id }}</td>
-                <td>{{ $pomodoro->user_id }}</td>
+                <td>{{ $pomodoro->status->name }}</td>
+                <td>{{ $pomodoro->tasks->name }}</td>
+                <td>{{ $pomodoro->user->name }}</td>
                 <td>{{ $pomodoro->start }}</td>
                 <td>{{ $pomodoro->end }}</td>
-                <td>{{ $pomodoro->deleted_by }}</td>
+                <td>{{ $pomodoro->deletedBy->name }}</td>
                 <td>
                     <form id = "deleteForm" action= "{{ route('pomodoros.destroy', [$pomodoro->id]) }}" method = 'POST'>
                         @csrf

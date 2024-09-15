@@ -15,7 +15,7 @@
                         @csrf
                         
                         <div class="form-group">
-                            @include('tasks.fields')
+                            @include('tasks.fieldscreate')
                         </div>
                     </form>
                 </div>
